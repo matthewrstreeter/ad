@@ -7,8 +7,8 @@
 param(
     [Parameter(Mandatory=$false, HelpMessage="Specify one or more OUs (Distinguished Names). If omitted, the script defined OUs are used.")]
     [string[]]$SearchBase = @(
-        "OU=Name,DC=Name,DC=Name",
-        "OU=Name,DC=Name,DC=Name"
+        "OU=Name,DC=Name,DC=Name", # EDIT THIS TO YOUR DOMAIN
+        "OU=Name,DC=Name,DC=Name" # EDIT THIS TO YOUR DOMAIN
     ),
     [switch]$NoGridView
 )
