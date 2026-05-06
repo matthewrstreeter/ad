@@ -18,6 +18,12 @@ By default, the script searches the OUs configured in the `SearchBase` parameter
 
 ## Parameters
 
+- `-AttributeNumber <int>`
+  - The extension attribute number to check (`1` through `15`).
+  - If omitted or set to `0`, the script checks all extension attributes `extensionAttribute1` through `extensionAttribute15`.
+- `-FilterMode <string>`
+  - The filter mode to apply: `Missing` to find users where the attribute is not set, or `Present` to find users where the attribute has a value.
+  - Defaults to `Missing`.
 - `-SearchBase <string[]>`
   - One or more OU distinguished names where the search should be performed.
   - If omitted, the script uses the default OUs defined in the script.
@@ -26,17 +32,20 @@ By default, the script searches the OUs configured in the `SearchBase` parameter
 
 ## Output
 
-- The script exports a CSV file to `.Temp\UsersWithExtAttribs-<yyyyMMdd-HHmmss>.csv`.
-- Each row contains the user name, UPN, and values for `extensionAttribute1` through `extensionAttribute15`.
+- The script exports a CSV file to `.\Temp\EnabledUsers-<Attribute>-<FilterMode>-<yyyyMMdd-HHmmss>.csv`.
+- Each row contains the user name, UPN, OU name, and values for `extensionAttribute1` through `extensionAttribute15`.
 
 ## Example Usage
 
 ```powershell
-# Use the default OUs configured in the script and show GridView
+# Use the default OUs configured in the script and show GridView for users with any extension attribute missing
 .\Get-UsersWithExtensionAttributes.ps1
 
-# Specify one or more OUs explicitly and suppress GridView
-.\Get-UsersWithExtensionAttributes.ps1 -SearchBase "OU=Users,DC=contoso,DC=com","OU=Staff,DC=contoso,DC=com" -NoGridView
+# Search specific OUs for users with extensionAttribute5 present and suppress GridView
+.\Get-UsersWithExtensionAttributes.ps1 -SearchBase "OU=Users,DC=contoso,DC=com","OU=Staff,DC=contoso,DC=com" -AttributeNumber 5 -FilterMode Present -NoGridView
+
+# Search specific OUs for users missing any extension attribute
+.\Get-UsersWithExtensionAttributes.ps1 -SearchBase "OU=Users,DC=contoso,DC=com","OU=Staff,DC=contoso,DC=com" -FilterMode Missing
 ```
 
 ## Notes
