@@ -33,7 +33,7 @@ By default, the script searches the OUs configured in the `SearchBase` parameter
 ## Output
 
 - The script exports a CSV file to `.\Temp\EnabledUsers-<Attribute>-<FilterMode>-<yyyyMMdd-HHmmss>.csv`.
-- Each row contains the user name, UPN, OU name, and values for `extensionAttribute1` through `extensionAttribute15`.
+- Each row contains the user DisplayName, UPN, OU name, and values for `extensionAttribute1` through `extensionAttribute15`.
 
 ## Example Usage
 
